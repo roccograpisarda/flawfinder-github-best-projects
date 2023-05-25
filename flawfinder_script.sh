@@ -38,7 +38,6 @@ echo "=============|Cloning Repositories|============="
 clone_if_not_exists "https://github.com/Genymobile/scrcpy.git" "scrcpy"
 clone_if_not_exists "https://github.com/obsproject/obs-studio.git" "obs-studio"
 clone_if_not_exists "https://github.com/videolan/vlc.git" "vlc"
-
 echo "=============|Starting Flawfinder|============="
 # Iterate over each project directory
 for project_dir in "$projects_dir"/*; do
@@ -49,7 +48,7 @@ for project_dir in "$projects_dir"/*; do
         echo "Processing project: $project_name"
 
         # Execute the flawfinder command and redirect the output to a CSV file
-        flawfinder --csv "$project_dir/". > "flawfinder_output.csv"
+        flawfinder --minlevel 4 --csv "$project_dir/". > "flawfinder_output.csv"
 
         # Move the CSV file to the output directory if it exists
         if [ -d "$output_dir" ]; then
