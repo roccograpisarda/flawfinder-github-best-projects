@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import os
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-print(base_dir)
 
 folder_path = os.path.join(base_dir, 'output')
 csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
@@ -39,9 +38,7 @@ for file in csv_files:
     plot_name = f"{os.path.splitext(file)[0]}.jpeg"
     plot_path = os.path.join(plot_folder, plot_name)
     plt.savefig(plot_path, format='jpeg')
-
-    # Display a message indicating the saved file
-    print(f"Saved plot: {plot_path}")
-
     # Close the plot
     plt.close()
+
+print("created all the plots for the csv files in the output folder")

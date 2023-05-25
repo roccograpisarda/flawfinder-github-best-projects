@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "=============|Script Started|============="
+
 # Get the directory of the script
 base_dir=$(dirname -- "$0")
 
@@ -25,17 +27,19 @@ clone_if_not_exists() {
     local repo_dir="$projects_dir/$repo_name"
 
     if [ ! -d "$repo_dir" ]; then
+        echo "Clonining $repo_name..."
         git clone "$repo_url" "$repo_dir"
     else
         echo "Skipping clone: $repo_name already exists"
     fi
 }
-
+echo "=============|Cloning Repositories|============="
 # Clone the repositories
 clone_if_not_exists "https://github.com/Genymobile/scrcpy.git" "scrcpy"
 clone_if_not_exists "https://github.com/obsproject/obs-studio.git" "obs-studio"
 clone_if_not_exists "https://github.com/videolan/vlc.git" "vlc"
 
+echo "=============|Starting Flawfinder|============="
 # Iterate over each project directory
 for project_dir in "$projects_dir"/*; do
     if [[ -d "$project_dir" ]]; then
@@ -58,3 +62,6 @@ for project_dir in "$projects_dir"/*; do
         cd "$base_dir" || exit
     fi
 done
+
+echo "=============|Creating Plots|============="
+python3 script.py
